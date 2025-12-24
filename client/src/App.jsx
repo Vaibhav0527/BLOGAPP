@@ -1,12 +1,18 @@
 import React from 'react'
-import { Button } from './components/ui/button'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './Layout/Layout'
+import Index from './pages/Index'
+import { RouteIndex } from './helpers/RouteName'
 
 const App = () => {
   return (
-    <>
-      <div>App</div>
-      <Button>Click me</Button>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path={RouteIndex} element={<Layout />}>
+          <Route index element={<Index />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
