@@ -1,9 +1,11 @@
 import React from 'react'
 
 const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
+    return (
+        <div className='text-sm text-center bg-gray-50 py-4'>
+            © Copyright 2025 | Designed & Developed By: <a href='https://github.com/Vaibhav0527' className='font-bold'>Vaibhav</a>
+        </div>
+    )
 }
 
 export default Footer

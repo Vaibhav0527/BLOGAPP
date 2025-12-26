@@ -7,15 +7,18 @@ import { SidebarProvider } from '@/components/ui/sidebar'
 
 const Layout = () => {
   return (
-    <SidebarProvider>
-      <Topbar />
-      <AppSidebar />
+   <SidebarProvider>
+  <Topbar />
+  <AppSidebar />
 
-      <main>
-        <Outlet />
-        <Footer />
-      </main>
-    </SidebarProvider>
+  <main className="border border-red-500 w-full">
+    <div className="w-full min-h-[calc(100vh-64px)]">
+      <Outlet />
+    </div>
+    <Footer />
+  </main>
+</SidebarProvider>
+
   )
 }
 
