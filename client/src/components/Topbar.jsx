@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MdLogin } from "react-icons/md";
 import logo from "@/assets/images/logo-white.png";
 import SearchBox from "./SearchBox";
+import { RouteSignIn } from "@/helpers/RouteName";
 
 const Topbar = () => {
   return (
@@ -19,7 +20,7 @@ const Topbar = () => {
       {/* Right */}
       <div>
         <Button asChild>
-          <Link to="" className="rounded-full flex items-center gap-2">
+          <Link to={RouteSignIn} className="rounded-full flex items-center gap-2">
             <MdLogin />
             Sign In
           </Link>

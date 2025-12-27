@@ -27,7 +27,7 @@ const AppSidebar = () => {
         <img src={logo} alt="Logo" className="w-28" />
       </SidebarHeader>
 
-      <SidebarContent className="bg-white px-2">
+      <SidebarContent className="bg-white px-1">
         {/* Main Menu */}
         <SidebarGroup>
           <SidebarMenu>
