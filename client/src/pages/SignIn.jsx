@@ -40,7 +40,10 @@ const SignIn = () => {
   return (
     <div className="flex justify-center items-center h-screen w-screen">
      <card className="p-6 shadow-lg">
-      <h1 className="text-2xl font-bold mb-4">Login into your account</h1>
+     <h1 className="text-2xl font-bold mb-4 text-center">
+  Login into your account
+</h1>
+
        <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -85,23 +88,26 @@ const SignIn = () => {
 <div className="mt-6">
   <Button
     type="submit"
-    className="w-full h-11 rounded-lg text-base font-medium"
+    className="w-full h-11 rounded-lg text-base font-medium 
+               bg-purple-600 hover:bg-purple-700 text-white 
+               transition-colors"
   >
     Sign In
   </Button>
 
-  <div className="flex justify-between items-center mt-4 text-sm text-gray-600">
-    <p>Don&apos;t have an account?</p>
+ <div className="flex justify-center items-center mt-4 text-sm text-gray-600 gap-1">
+  <p>Don't have an account?</p>
 
-    <Link
-      to={RouteSignUp}
-      className="font-medium text-blue-600 hover:text-blue-700 hover:underline transition"
-    >
-      Sign Up
-    </Link>
-  </div>
+  <Link
+    to={RouteSignUp}
+    className="font-medium text-purple-600 hover:text-purple-700 hover:underline transition"
+  >
+    Sign Up
+  </Link>
 </div>
-f
+
+</div>
+
         </form>
       </Form>
      </card>
