@@ -19,6 +19,7 @@ import { Card } from "@/components/ui/card"
 import { RouteSignIn } from '@/helpers/RouteName'
 import { getEvn } from '@/helpers/getEnv'
 import { showToast } from '@/helpers/showToast' 
+import GoogleLogin from '@/components/GoogleLogin'
 
 const formSchema = z
   .object({
@@ -77,7 +78,9 @@ const SignUp = () => {
         <h1 className="text-2xl font-bold mb-4 text-center">
           Create your account
         </h1>
-
+         <div>
+        <GoogleLogin />
+      </div> 
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -162,6 +165,7 @@ const SignUp = () => {
           </form>
         </Form>
       </Card>
+     
     </div>
   )
 }
