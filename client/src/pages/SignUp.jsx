@@ -78,9 +78,14 @@ const SignUp = () => {
         <h1 className="text-2xl font-bold mb-4 text-center">
           Create your account
         </h1>
-         <div>
-        <GoogleLogin />
-      </div> 
+          <div className=''>
+                    <GoogleLogin />
+                    <div className='border my-5 flex justify-center items-center'>
+                        <span className='absolute bg-white text-sm'>Or</span>
+                    </div>
+
+                </div>
+
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}

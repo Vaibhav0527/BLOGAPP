@@ -20,6 +20,9 @@ import { RouteIndex, RouteSignUp } from '@/helpers/RouteName'
 import { showToast } from '@/helpers/showToast'
 import { getEvn } from '@/helpers/getEnv'
 import { Card } from "@/components/ui/card"
+import { setUser } from '@/redux/user/user.slice'
+import { useDispatch } from 'react-redux'
+import GoogleLogin from '@/components/GoogleLogin'
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -27,6 +30,7 @@ const formSchema = z.object({
 })
 
 const SignIn = () => {
+   const dispath = useDispatch()
   const navigate = useNavigate()
 
   const form = useForm({
@@ -54,6 +58,7 @@ const SignIn = () => {
       if (!response.ok) {
         return showToast('error', data.message)
       }
+       dispath(setUser(data.user))
 
       showToast('success', data.message)
       navigate(RouteIndex)
@@ -69,6 +74,14 @@ const SignIn = () => {
         <h1 className="text-2xl font-bold mb-4 text-center">
           Login into your account
         </h1>
+          <div className=''>
+                    <GoogleLogin />
+                    <div className='border my-5 flex justify-center items-center'>
+                        <span className='absolute bg-white text-sm'>Or</span>
+                    </div>
+
+                </div>
+
 
         <Form {...form}>
           <form

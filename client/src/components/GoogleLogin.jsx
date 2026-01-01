@@ -7,11 +7,13 @@ import { RouteIndex } from '@/helpers/RouteName';
 import { showToast } from '@/helpers/showToast';
 import { getEvn } from '@/helpers/getEnv';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/redux/user/user.slice';
 
 
 
 const GoogleLogin = () => {
-    
+    const dispath = useDispatch()
     const navigate = useNavigate()
     const handleLogin = async () => {
         try {
@@ -32,6 +34,7 @@ const GoogleLogin = () => {
             if (!response.ok) {
                 return showToast('error', data.message)
             }
+               dispath(setUser(data.user))
         
             navigate(RouteIndex)
             showToast('success', data.message)
