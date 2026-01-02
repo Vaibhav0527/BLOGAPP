@@ -23,11 +23,11 @@ const AppSidebar = () => {
   return (
     <Sidebar>
       {/* Logo */}
-      <SidebarHeader className="bg-white border-b px-6 py-4">
-        <img src={logo} alt="Logo" className="w-28" />
-      </SidebarHeader>
+       <SidebarHeader className="bg-white">
+                <img src={logo} width={120} />
+            </SidebarHeader>
 
-      <SidebarContent className="bg-white px-1">
+      <SidebarContent className="bg-white">
         {/* Main Menu */}
         <SidebarGroup>
           <SidebarMenu>
