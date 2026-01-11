@@ -1,93 +1,107 @@
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
-
-import { Link } from "react-router-dom";
-import logo from "@/assets/images/logo-white.png";
-
+    Sidebar,
+    SidebarContent,
+    SidebarGroup,
+    SidebarGroupLabel,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from "@/components/ui/sidebar"
+import { Link } from "react-router-dom"
+import logo from '@/assets/images/logo-white.png'
 import { IoHomeOutline } from "react-icons/io5";
 import { BiCategoryAlt } from "react-icons/bi";
 import { GrBlog } from "react-icons/gr";
 import { FaRegComments } from "react-icons/fa6";
 import { LuUsers } from "react-icons/lu";
 import { GoDot } from "react-icons/go";
+import { RouteCategoryDetails, RouteIndex } from "@/helpers/RouteName";
+import { useFetch } from "@/hooks/useFetch";
+import { getEvn } from "@/helpers/getEnv";
+import { useSelector } from "react-redux";
 
 const AppSidebar = () => {
-  return (
-    <Sidebar>
-      {/* Logo */}
-       <SidebarHeader className="bg-white">
+    const user = useSelector(state => state.user)
+    const { data: categoryData } = useFetch(`${getEvn('VITE_API_BASE_URL')}/category/all-category`, {
+        method: 'get',
+        credentials: 'include'
+    })
+
+    return (
+        <Sidebar>
+            <SidebarHeader className="bg-white">
                 <img src={logo} width={120} />
             </SidebarHeader>
+            <SidebarContent className="bg-white">
+                <SidebarGroup>
+                    <SidebarMenu>
+                        <SidebarMenuItem>
+                            <SidebarMenuButton>
+                                <IoHomeOutline />
+                                <Link to={RouteIndex}>Home</Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
 
-      <SidebarContent className="bg-white">
-        {/* Main Menu */}
-        <SidebarGroup>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton className="flex items-center gap-3 rounded-lg">
-                <IoHomeOutline className="text-lg" />
-                <span>Home</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+                        {user && user.isLoggedIn
+                            ? <>
+                                <SidebarMenuItem>
+                                    <SidebarMenuButton>
+                                        <GrBlog />
+                                        <Link >Blogs</Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                                <SidebarMenuItem>
+                                    <SidebarMenuButton>
+                                        <FaRegComments />
+                                        <Link>Comments</Link>
+                                    </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            </>
+                            :
+                            <></>
+                        }
 
-            <SidebarMenuItem>
-              <SidebarMenuButton className="flex items-center gap-3 rounded-lg">
-                <GrBlog className="text-lg" />
-                <span>Blogs</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+                        <>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton>
+                                    <BiCategoryAlt />
+                                    <Link to={RouteCategoryDetails}>Categories</Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
 
-            <SidebarMenuItem>
-              <SidebarMenuButton className="flex items-center gap-3 rounded-lg">
-                <FaRegComments className="text-lg" />
-                <span>Comments</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton>
+                                    <LuUsers />
+                                    <Link>Users</Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        </>
+                        
 
-            <SidebarMenuItem>
-              <SidebarMenuButton className="flex items-center gap-3 rounded-lg">
-                <BiCategoryAlt className="text-lg" />
-                <span>Categories</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+                    </SidebarMenu>
+                </SidebarGroup>
 
-            <SidebarMenuItem>
-              <SidebarMenuButton className="flex items-center gap-3 rounded-lg">
-                <LuUsers className="text-lg" />
-                <span>Users</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroup>
+                <SidebarGroup>
+                    <SidebarGroupLabel>
+                        Categories
+                    </SidebarGroupLabel>
+                    <SidebarMenu>
+                        {categoryData?.category?.length > 0
+                            && categoryData.category.map(category => <SidebarMenuItem key={category._id}>
+                                <SidebarMenuButton>
+                                    <GoDot />
+                                    <Link to={RouteCategoryDetails}>{category.name}</Link>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>)
+                        }
 
-        {/* Categories Section */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="px-3 text-xs uppercase tracking-wide text-muted-foreground">
-            Categories
-          </SidebarGroupLabel>
+                    </SidebarMenu>
+                </SidebarGroup>
+            </SidebarContent>
 
-          <SidebarMenu>
-            {["Technology", "Programming", "AI", "Web Dev"].map((item) => (
-              <SidebarMenuItem key={item}>
-                <SidebarMenuButton className="flex items-center gap-3 pl-6 rounded-lg">
-                  <GoDot className="text-sm" />
-                  <span>{item}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
-  );
-};
+        </Sidebar>
+    )
+}
 
-export default AppSidebar;
+export default AppSidebar

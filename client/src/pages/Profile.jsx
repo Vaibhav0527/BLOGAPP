@@ -91,6 +91,13 @@ const Profile = () => {
     }
 
     if (loading) return <Loading />
+    if (error) {
+        return (
+            <div className="p-4">
+                <p className="text-red-600">Failed to load profile.</p>
+            </div>
+        )
+    }
     return (
         <Card className="max-w-screen-md mx-auto ">
 

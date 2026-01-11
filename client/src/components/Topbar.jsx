@@ -2,6 +2,7 @@ import { Button } from "./ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { MdLogin } from "react-icons/md";
 import logo from "@/assets/images/logo-white.png";
+import usericon from "@/assets/images/user.png";
 import SearchBox from "./SearchBox";
 import { RouteIndex, RouteProfile, RouteSignIn } from "@/helpers/RouteName";
 import {
@@ -12,10 +13,10 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar" 
+import { Avatar, AvatarImage } from "@/components/ui/avatar" 
 import { FaRegUser } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-import { IoLogOutOutline, IoSearch } from "react-icons/io5";
+import { IoLogOutOutline } from "react-icons/io5";
 import { removeUser } from "@/redux/user/user.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { showToast } from "@/helpers/showToast";
@@ -27,7 +28,7 @@ import { getEvn } from "@/helpers/getEnv";
 
 const Topbar = () => { 
   
-    const dispath = useDispatch()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const user = useSelector((state) => state.user)
 
@@ -42,7 +43,7 @@ const Topbar = () => {
             if (!response.ok) {
                 return showToast('error', data.message)
             }
-            dispath(removeUser())
+            dispatch(removeUser())
             navigate(RouteIndex)
             showToast('success', data.message)
         } catch (error) {
